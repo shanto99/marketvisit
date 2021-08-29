@@ -3,6 +3,7 @@ import {Container, Grid, withStyles, CssBaseline, Box, Typography} from "@materi
 import {PieChart, PeopleAlt, PersonAdd} from "@material-ui/icons";
 import logo from "../static/logo.svg";
 import avatar from "../static/avatar.jpg";
+import {Link} from "react-router-dom";
 
 const styles = (theme) => ({
     sideBar: {
@@ -59,16 +60,18 @@ class Sidebar extends React.Component {
                 <Box width="100" mt={3}>
                     <ul className={classes.menuList}>
                         <li>
-                            <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                            <Link to="/">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
                                 <span className={classes.menuIcon}>
                                     <PieChart/>
                                 </span>
-                                <Box ml={2} display="flex" justifyContent="flex-start">
-                                    <Typography variant="subtitle2" className={classes.menuName}>
-                                        Dashboard
-                                    </Typography>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            Dashboard
+                                        </Typography>
+                                    </Box>
                                 </Box>
-                            </Box>
+                            </Link>
                         </li>
                         <li>
                             <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
@@ -83,16 +86,18 @@ class Sidebar extends React.Component {
                             </Box>
                         </li>
                         <li>
-                            <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                            <Link to="/add-user">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
                                 <span className={classes.menuIcon}>
                                     <PersonAdd/>
                                 </span>
-                                <Box ml={2} display="flex" justifyContent="flex-start">
-                                    <Typography variant="subtitle2" className={classes.menuName}>
-                                        Add user
-                                    </Typography>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            Add user
+                                        </Typography>
+                                    </Box>
                                 </Box>
-                            </Box>
+                            </Link>
                         </li>
                     </ul>
                 </Box>

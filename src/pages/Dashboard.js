@@ -83,6 +83,9 @@ const styles = (theme) => ({
     },
     chartContainer: {
         height: '32vh'
+    },
+    chartCard: {
+        borderRadius: '15px'
     }
 });
 
@@ -109,7 +112,7 @@ class Dashboard extends React.Component {
                     <strong>Hi, Welcome back</strong>
                 </Typography>
                 <Grid container spacing={3}>
-                    <Grid container lg={3} sm={12} className={classes.summaryBoxContainer}>
+                    <Grid container item lg={3} sm={12} className={classes.summaryBoxContainer}>
                         <Box className={`${classes.summaryBox} ${classes.firstBox}`} boxShadow={1}>
                             <div className={classes.boxContentContainer}>
                                 <div className={`${classes.boxIconContainer} ${classes.firstBoxIconContainer}`}>
@@ -124,7 +127,7 @@ class Dashboard extends React.Component {
                             </div>
                         </Box>
                     </Grid>
-                    <Grid container lg={3} sm={12} className={classes.summaryBoxContainer}>
+                    <Grid container item lg={3} sm={12} className={classes.summaryBoxContainer}>
                         <Box className={`${classes.summaryBox} ${classes.secondBox}`} boxShadow={1}>
                             <div className={classes.boxContentContainer}>
                                 <div className={`${classes.boxIconContainer} ${classes.secondBoxIconContainer}`}>
@@ -139,7 +142,7 @@ class Dashboard extends React.Component {
                             </div>
                         </Box>
                     </Grid>
-                    <Grid container lg={3} sm={12} className={classes.summaryBoxContainer}>
+                    <Grid container item lg={3} sm={12} className={classes.summaryBoxContainer}>
                         <Box className={`${classes.summaryBox} ${classes.thirdBox}`} boxShadow={1}>
                             <div className={classes.boxContentContainer}>
                                 <div className={`${classes.boxIconContainer} ${classes.thirdBoxIconContainer}`}>
@@ -154,7 +157,7 @@ class Dashboard extends React.Component {
                             </div>
                         </Box>
                     </Grid>
-                    <Grid container lg={3} sm={12} className={classes.summaryBoxContainer}>
+                    <Grid container item lg={3} sm={12} className={classes.summaryBoxContainer}>
                         <Box className={`${classes.summaryBox} ${classes.fourthBox}`} boxShadow={1}>
                             <div className={classes.boxContentContainer}>
                                 <div  className={`${classes.boxIconContainer} ${classes.fourthBoxIconContainer}`}>
@@ -173,7 +176,7 @@ class Dashboard extends React.Component {
                 <br/><br/>
                 <Grid container spacing={2} justifyContent="space-around">
                     <Grid item lg={8} md={8} sm={12}>
-                        <Box width="100" boxShadow={1} p={3}>
+                        <Box width="100" boxShadow={2} p={3} className={classes.chartCard}>
                             <Typography variant="h4" className={classes.greeting}>
                                 <strong>Website visit</strong>
                             </Typography>
@@ -185,7 +188,7 @@ class Dashboard extends React.Component {
                         </Box>
                     </Grid>
                     <Grid item lg={4} md={4} sm={12}>
-                        <Box width="100" boxShadow={1} p={3}>
+                        <Box width="100" boxShadow={2} p={3} className={classes.chartCard}>
                             <Typography variant="h4" className={classes.greeting}>
                                 <strong>Zone overview</strong>
                             </Typography>
