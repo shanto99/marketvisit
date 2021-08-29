@@ -6,6 +6,7 @@ import avatar from "../static/avatar.jpg";
 
 const styles = (theme) => ({
     sideBar: {
+        position: 'fixed',
         width: '280px',
         height: '100vh',
         borderRight: '1px solid rgba(145, 158, 171, 0.24)'
@@ -44,7 +45,7 @@ class Sidebar extends React.Component {
         const classes = this.props.classes;
         return (
             <Box className={classes.sideBar}>
-                <Box p={2} width="100" display="flex" justifyContent="flex-start" mb={3}>
+                <Box p={2} width="100" display="flex" justifyContent="flex-start" mb={1}>
                     <img className={classes.logo} src={logo} alt=""/>
                 </Box>
                 <Box width="100" p={2}>
