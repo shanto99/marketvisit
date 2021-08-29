@@ -7,10 +7,6 @@ class WebsiteVisitChart extends React.Component {
 
         this.state = {
             options: {
-                chart: {
-                    id: "basic-bar",
-                    width: '100%'
-                },
                 xaxis: {
                     categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
                 }
@@ -26,17 +22,13 @@ class WebsiteVisitChart extends React.Component {
 
     render() {
         return (
-            <div className="app">
-                <div className="row">
-                    <div className="mixed-chart">
-                        <Chart
-                            options={this.state.options}
-                            series={this.state.series}
-                            type="bar"
-                        />
-                    </div>
-                </div>
-            </div>
+            <Chart
+                options={this.state.options}
+                series={this.state.series}
+                type="area"
+                width="100%"
+                height="100%"
+            />
         );
     }
 }

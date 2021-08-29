@@ -6,7 +6,8 @@ class ZoneOverviewChart extends React.Component {
         super(props);
 
         this.state = {
-            options: {},
+            options: {
+            },
             series: [44, 55, 41, 17, 15],
             labels: ['A', 'B', 'C', 'D', 'E']
         }
@@ -14,9 +15,8 @@ class ZoneOverviewChart extends React.Component {
 
     render() {
         return (
-            <div className="donut">
-                <Chart options={this.state.options} series={this.state.series} type="donut" width="380" />
-            </div>
+            <Chart options={this.state.options} width="100%" height="100%"
+                   series={this.state.series} type="donut" />
         );
     }
 }
