@@ -5,6 +5,9 @@ import Navbar from "../components/Navbar";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import AddUser from "../pages/AddUser";
+import Zones from "../pages/Zones";
+import Territories from "../pages/Territories";
+import Outlets from "../pages/Outlets";
 
 import Sidebar from "../components/Sidebar";
 import {connect} from "react-redux";
@@ -41,6 +44,15 @@ class MainLayout extends React.Component {
                             <Switch>
                                 <Route exact path="/add-user">
                                     <AddUser/>
+                                </Route>
+                                <Route path="/zones">
+                                    <Zones/>
+                                </Route>
+                                <Route path="/territories">
+                                    <Territories/>
+                                </Route>
+                                <Route path="/outlets">
+                                    <Outlets/>
                                 </Route>
                                 <Route path="/">
                                     <Dashboard/>

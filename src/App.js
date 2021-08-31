@@ -37,7 +37,7 @@ class App extends React.Component {
             {this.props.isLoading
                 ? <div className={classes.loaderContainer}>
                     <Loader
-                        type="Puff"
+                        type="Circles"
                         color="#00BFFF"
                         height={100}
                         width={100}

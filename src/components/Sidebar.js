@@ -1,6 +1,6 @@
 import React from "react";
 import {Container, Grid, withStyles, CssBaseline, Box, Typography} from "@material-ui/core";
-import {PieChart, PeopleAlt, PersonAdd} from "@material-ui/icons";
+import {PieChart, PeopleAlt, PersonAdd, PinDrop, Store} from "@material-ui/icons";
 import logo from "../static/logo.svg";
 import avatar from "../static/avatar.jpg";
 import {Link} from "react-router-dom";
@@ -29,7 +29,10 @@ const styles = (theme) => ({
         listStyle: 'none',
         padding: '0',
         margin: '0',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        '& a': {
+            textDecoration: 'none',
+        }
     },
     menuName: {
         fontSize: '.9rem',
@@ -86,14 +89,42 @@ class Sidebar extends React.Component {
                             </Box>
                         </li>
                         <li>
-                            <Link to="/add-user">
+                            <Link to="/zones">
                                 <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
                                 <span className={classes.menuIcon}>
-                                    <PersonAdd/>
+                                    <PinDrop/>
                                 </span>
                                     <Box ml={2} display="flex" justifyContent="flex-start">
                                         <Typography variant="subtitle2" className={classes.menuName}>
-                                            Add user
+                                            Zones
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/territories">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                                <span className={classes.menuIcon}>
+                                    <PinDrop/>
+                                </span>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            Territories
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/outlets">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                                <span className={classes.menuIcon}>
+                                    <Store/>
+                                </span>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            Add outlet
                                         </Typography>
                                     </Box>
                                 </Box>
