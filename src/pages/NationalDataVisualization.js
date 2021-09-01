@@ -70,8 +70,8 @@ export class LayeredMap extends React.Component {
         {/*</DeckGL>*/}
                 <DeckGL style={{position: 'relative'}}
                         initialViewState={{
-                            longitude: -74.00578,
-                            latitude: 40.713067,
+                            longitude: -122.4194,
+                            latitude: 37.7749,
                             zoom: 12
                         }}
                         height="100%"

@@ -1,11 +1,12 @@
 import React from "react";
-import {Container, Grid, withStyles, Box, List, FormControl, InputLabel, Select, MenuItem} from "@material-ui/core";
+import {Container, Grid, withStyles, Box, List,
+    FormControl, InputLabel, Select, MenuItem} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
 import {connect} from "react-redux";
-
+import {Store} from "@material-ui/icons";
 import MyListItem from "../components/MyListItem";
 
 import TerritoryApi from "../api/Territory";
@@ -54,30 +55,39 @@ class Outlets extends React.Component {
             contactPhone: ''
         };
         this.getAllOutlets = this.getAllOutlets.bind(this);
-        this.saveTerritory = this.saveTerritory.bind(this);
-        this.editTerritory = this.editTerritory.bind(this);
+        this.saveOutlet = this.saveOutlet.bind(this);
+        this.editOutlet = this.editOutlet.bind(this);
     }
     componentDidMount() {
         Zone.getAllZones().then(res => {
-            this.setState({
-                zones: res.data.zones
-            }, this.getAllTerritories);
+            let zones = res.data.zones;
+            TerritoryApi.getAllTerritories().then(res => {
+                let territories = res.data.territories;
+
+                this.setState({
+                    zones: zones,
+                    territories: territories,
+                }, this.getAllOutlets);
+            });
         });
     }
 
-    editTerritory(territoryId)
+    editOutlet(outletId)
     {
-        let territory = this.state.territories.find(function(territory) {
-            return territory.TerritoryID ===  territoryId;
+        console.log(outletId);
+        let outlet = this.state.outlets.find(function(outlet) {
+            return outlet.OutletCode ===  outletId;
         });
 
-        if(territory) {
-            this.setState({
-                zoneId: territory.ZoneID,
-                territoryId: territory.TerritoryID,
-                territoryName: territory.Territory
-            });
-        }
+        console.log(outlet);
+
+        // if(outlet) {
+        //     this.setState({
+        //         zoneId: territory.ZoneID,
+        //         territoryId: territory.TerritoryID,
+        //         territoryName: territory.Territory
+        //     });
+        // }
     }
 
     getAllOutlets() {
@@ -94,7 +104,7 @@ class Outlets extends React.Component {
             })
     }
 
-    saveTerritory(e)
+    saveOutlet(e)
     {
         // e.preventDefault();
         // this.props.start_loader();
@@ -131,26 +141,27 @@ class Outlets extends React.Component {
                             <List>
                                 {this.state.outlets.map( outlet => {
                                     return (<MyListItem
+                                        itemIcon={<Store color="secondary"/>}
                                         key={outlet.OutletCode}
-                                        itemId={outlet.OutletName}
+                                        itemId={outlet.OutletCode}
                                         primaryText={`${outlet.OutletCode}-${outlet.OutletName}`}
-                                        editCallback={this.editTerritory}
+                                        editCallback={this.editOutlet}
                                     />)
                                 })}
                             </List>
                         </Grid>
-                        <Grid item lg={6} md={6} sm={12}>
+                        <Grid container item lg={6} md={6} sm={12} spacing={2}>
                             <Typography component="h1" variant="h5">
                                 Add an outlet
                             </Typography>
-                            <form className={classes.form} noValidate onSubmit={this.saveTerritory}>
+                            <form className={classes.form} noValidate onSubmit={this.saveOutlet}>
                                 <br/>
                                 <Grid item lg={12} sm={12}>
                                     <FormControl variant="outlined" fullWidth>
                                         <InputLabel id="demo-simple-select-outlined-label">Zone</InputLabel>
                                         <Select
-                                            labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined"
+                                            labelId="zone-label"
+                                            id="zone"
                                             value={this.state.zoneId}
                                             label="Select zone"
                                             fullWidth
@@ -168,26 +179,79 @@ class Outlets extends React.Component {
                                             })}
                                         </Select>
                                     </FormControl>
+                                </Grid>
+                                <br/>
+                                <Grid item lg={12} sm={12}>
+                                    <FormControl variant="outlined" fullWidth>
+                                        <InputLabel id="demo-simple-select-outlined-label">Territory</InputLabel>
+                                        <Select
+                                            labelId="territory-label"
+                                            id="territory"
+                                            value={this.state.textRendering}
+                                            label="Select territory"
+                                            fullWidth
+                                            onChange={(e) => this.setState({
+                                                zoneId: e.target.value
+                                            })}
+                                        >
+                                            <MenuItem value="">
+                                                <em>Select territory</em>
+                                            </MenuItem>
+                                            {this.state.territories.map(territory => {
+                                                return (
+                                                    <MenuItem key={territory.TerritoryID} value={territory.TerritoryID}>
+                                                        {territory.Territory}
+                                                    </MenuItem>
+                                                )
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item lg={12} sm={12}>
                                     <TextField
-                                        value={this.state.territoryId}
+                                        value={this.state.outletName}
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="territoryCode"
-                                        label="Territory code"
+                                        id="outletName"
+                                        label="Outlet name"
                                         autoComplete="off"
                                     />
                                 </Grid>
                                 <Grid item lg={12} sm={12}>
                                     <TextField
-                                        value={this.state.territoryName}
+                                        value={this.state.outletAddress}
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="territoryName"
-                                        label="Territory name"
+                                        id="outletAddress"
+                                        label="Outlet address"
+                                        autoComplete="off"
+                                    />
+                                </Grid>
+                                <Grid item lg={12} sm={12}>
+                                    <TextField
+                                        value={this.state.contactPerson}
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="contactPerson"
+                                        label="Contact person"
+                                        autoComplete="off"
+                                    />
+                                </Grid>
+                                <Grid item lg={12} sm={12}>
+                                    <TextField
+                                        value={this.state.contactPhone}
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="contactPhone"
+                                        label="Contact phone"
                                         autoComplete="off"
                                     />
                                 </Grid>

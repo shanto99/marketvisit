@@ -55,7 +55,7 @@ class MainLayout extends React.Component {
                                 <Route path="/outlets">
                                     <Outlets/>
                                 </Route>
-                                <Route path="/test">
+                                <Route path="/national-overview">
                                     <LayeredMap/>
                                 </Route>
                                 <Route path="/">

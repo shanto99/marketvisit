@@ -1,6 +1,6 @@
 import React from "react";
 import {Container, Grid, withStyles, CssBaseline, Box, Typography} from "@material-ui/core";
-import {PieChart, PeopleAlt, PersonAdd, PinDrop, Store} from "@material-ui/icons";
+import {PieChart, PeopleAlt, PersonAdd, PinDrop, Store, Map} from "@material-ui/icons";
 import logo from "../static/logo.svg";
 import avatar from "../static/avatar.jpg";
 import {Link} from "react-router-dom";
@@ -125,6 +125,20 @@ class Sidebar extends React.Component {
                                     <Box ml={2} display="flex" justifyContent="flex-start">
                                         <Typography variant="subtitle2" className={classes.menuName}>
                                             Add outlet
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/national-overview">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                                <span className={classes.menuIcon}>
+                                    <Map/>
+                                </span>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            National overview
                                         </Typography>
                                     </Box>
                                 </Box>
