@@ -24,7 +24,7 @@ class App extends React.Component {
     return (
         <React.Fragment>
             <CssBaseline/>
-                <Router>
+                <Router basename="/marketvisit_app">
                     <Switch>
                         <Route exact path="/login">
                             <Login/>

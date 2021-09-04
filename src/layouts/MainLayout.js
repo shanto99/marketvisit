@@ -43,7 +43,7 @@ class MainLayout extends React.Component {
                         <Navbar/>
                         <Box width="100" className={classes.mainSection}>
                             <Switch>
-                                <Route exact path="/add-user">
+                                <Route exact path="/users">
                                     <AddUser/>
                                 </Route>
                                 <Route path="/zones">

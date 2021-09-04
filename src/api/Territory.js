@@ -1,9 +1,9 @@
 import authorizedApiCall from "./AuthorizedApiCall";
 
 const TerritoryApi = {
-    getAllTerritories: function() {
+    getAllTerritories: function(zoneId='') {
         return new Promise(function (resolve, reject) {
-            authorizedApiCall('GET', '/all_territories')
+            authorizedApiCall('GET', `/all_territories/${zoneId}`)
                 .then(function(res) {
                    resolve(res.data);
                 })

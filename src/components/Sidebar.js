@@ -77,16 +77,18 @@ class Sidebar extends React.Component {
                             </Link>
                         </li>
                         <li>
-                            <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
-                                <span className={classes.menuIcon}>
-                                    <PeopleAlt/>
-                                </span>
-                                <Box ml={2} display="flex" justifyContent="flex-start">
-                                    <Typography variant="subtitle2" className={classes.menuName}>
-                                        Users
-                                    </Typography>
+                            <Link to="/users">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                                    <span className={classes.menuIcon}>
+                                        <PeopleAlt/>
+                                    </span>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            Users
+                                        </Typography>
+                                    </Box>
                                 </Box>
-                            </Box>
+                            </Link>
                         </li>
                         <li>
                             <Link to="/zones">

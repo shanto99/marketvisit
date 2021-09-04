@@ -16,7 +16,7 @@ const MyListItem = (props) => {
                 <IconButton edge="end" aria-label="edit" onClick={() => props.editCallback(props.itemId)}>
                     <Edit />
                 </IconButton>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" aria-label="delete" onClick={() => props.deleteCallback(props.itemId)}>
                     <Delete />
                 </IconButton>
             </ListItemSecondaryAction>
