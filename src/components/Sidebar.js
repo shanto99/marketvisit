@@ -45,6 +45,27 @@ const styles = (theme) => ({
 });
 
 class Sidebar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            userName: ''
+        }
+    }
+
+    componentDidMount() {
+        if (localStorage.getItem("marketvisit-user") === null) return;
+        let user = localStorage.getItem("marketvisit-user");
+        if(user) {
+            user = JSON.parse(user);
+
+            this.setState({
+                userName: user.user.UserName
+            });
+        }
+
+    }
+
     render() {
         const classes = this.props.classes;
         return (
@@ -56,7 +77,7 @@ class Sidebar extends React.Component {
                     <Box width="100" className={classes.avatarBox} p={2}>
                         <img className={classes.logo} src={avatar} alt=""/>
                         <Box display="flex" alignItems="center" ml={3}>
-                            <span>Jhon doe</span>
+                            <span>{this.state.userName}</span>
                         </Box>
                     </Box>
                 </Box>
@@ -127,6 +148,20 @@ class Sidebar extends React.Component {
                                     <Box ml={2} display="flex" justifyContent="flex-start">
                                         <Typography variant="subtitle2" className={classes.menuName}>
                                             Add outlet
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/attendances">
+                                <Box className={classes.menuItem} display="flex" width="100" px={5} py={1}>
+                                <span className={classes.menuIcon}>
+                                    <Map/>
+                                </span>
+                                    <Box ml={2} display="flex" justifyContent="flex-start">
+                                        <Typography variant="subtitle2" className={classes.menuName}>
+                                            Attendances
                                         </Typography>
                                     </Box>
                                 </Box>

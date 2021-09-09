@@ -8,6 +8,7 @@ import ZoneOverviewChart from "../components/ZoneOverviewChart";
 
 import logo from "../static/logo.svg";
 import {People, Store, PinDrop, PhotoCamera} from "@material-ui/icons";
+import DashboardApi from "../api/DashboardApi";
 
 const styles = (theme) => ({
     summaryBoxContainer: {
@@ -94,13 +95,23 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
-            showChart: false
+            showChart: false,
+            userCount: 0,
+            storeCount: 0,
+            territoryCount: 0,
+            photoCount: 0
         }
     }
 
     componentDidMount() {
-        this.setState({
-           showChart: true
+        DashboardApi.getDashboardData().then(res => {
+            this.setState({
+                userCount: res.userCount,
+                storeCount: res.storeCount,
+                territoryCount: res.territoryCount,
+                photoCount: res.imageCount,
+                showChart: true
+            });
         });
     }
 
@@ -119,7 +130,7 @@ class Dashboard extends React.Component {
                                     <People fontSize="large"/>
                                 </div>
                                 <Typography variant="h3" className={classes.summaryCount}>
-                                    120K
+                                    {this.state.userCount}
                                 </Typography>
                                 <Typography variant="subtitle1">
                                     Total user
@@ -134,7 +145,7 @@ class Dashboard extends React.Component {
                                     <Store fontSize="large"/>
                                 </div>
                                 <Typography variant="h3" className={classes.summaryCount}>
-                                    314K
+                                    {this.state.storeCount}
                                 </Typography>
                                 <Typography variant="subtitle1">
                                     Total store
@@ -149,7 +160,7 @@ class Dashboard extends React.Component {
                                     <PinDrop fontSize="large"/>
                                 </div>
                                 <Typography variant="h3" className={classes.summaryCount}>
-                                    230
+                                    {this.state.territoryCount}
                                 </Typography>
                                 <Typography variant="subtitle1">
                                     Total territory
@@ -164,7 +175,7 @@ class Dashboard extends React.Component {
                                     <PhotoCamera fontSize="large"/>
                                 </div>
                                 <Typography variant="h3" className={classes.summaryCount}>
-                                    870K
+                                    {this.state.photoCount}
                                 </Typography>
                                 <Typography variant="subtitle1">
                                     Total photo

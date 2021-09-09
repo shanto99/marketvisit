@@ -7,9 +7,9 @@ const authHelpers =  {
                 UserID: userId,
                 Password: password
             }).then(function(res) {
-                let token = res.data.data.token;
-                console.log(token);
-                localStorage.setItem('marketvisit-user', token);
+                let userObj = res.data.data;
+                console.log(userObj);
+                localStorage.setItem('marketvisit-user', JSON.stringify(userObj));
                 resolve(res);
             }).catch(function (err) {
                 if(reject) reject(err);
@@ -21,10 +21,11 @@ const authHelpers =  {
         return new Promise(function(resolve, reject) {
            authorizedApiCall('POST', '/logout')
                .then(function(res) {
-                   localStorage.removeItem('marketvisit-user');
                    resolve(res);
+                   localStorage.removeItem('marketvisit-user');
                 })
                .catch(function(err) {
+                   localStorage.removeItem('marketvisit-user');
                    if(reject) reject(err);
                    else console.log(err);
                })

@@ -1,6 +1,6 @@
 import authorizedApiCall from "./AuthorizedApiCall";
 const UserApi = {
-  saveUser: function(userId, userName, userPassword, userDesignation, userEmail, userPhone, userTerritory, userSupervisor) {
+  saveUser: function(userId, userName, userPassword, userDesignation, userEmail, userPhone, userTerritory, userSupervisor, selectedUserTypeID) {
     return new Promise(function(resolve, reject) {
       authorizedApiCall('POST', '/register', {
         UserID: userId,
@@ -10,7 +10,8 @@ const UserApi = {
         Email: userEmail,
         MobileNo: userPhone,
         TerritoryID: userTerritory,
-        SupervisorID: userSupervisor
+        SupervisorID: userSupervisor,
+        UserTypeID: selectedUserTypeID
       }).then(function(res) {
         resolve();
       }).catch(function(err) {
@@ -39,6 +40,32 @@ const UserApi = {
       }).catch(function(err) {
         reject(err);
       });
+    });
+  },
+
+  getSubordinates: function(){
+    return new Promise(function(resolve, reject) {
+      let user = localStorage.getItem('marketvisit-user');
+      user = JSON.parse(user);
+      let userId = user.user.UserID;
+      authorizedApiCall('GET', `/get_subordinates/${userId}`)
+          .then(function(res) {
+            resolve(res.data && res.data.data);
+          })
+          .catch(function(err) {
+            reject(err);
+          })
+    })
+  },
+
+  getUserTypes: function() {
+    return new Promise(function(resolve, reject) {
+      authorizedApiCall('GET', '/user_types')
+          .then(function(res) {
+            resolve(res.data);
+          }).catch(function(err) {
+            reject(err);
+          });
     });
   }
 

@@ -42,6 +42,8 @@ class AddUser extends React.Component {
         this.selectedUser = null;
         this.state = {
             users: [],
+            userTypes: [],
+            selectedUserType: '',
             zones: [],
             territories: [],
             userName: '',
@@ -63,6 +65,7 @@ class AddUser extends React.Component {
         this.handleTerritoryChange = this.handleTerritoryChange.bind(this);
         this.handleSupervisorChange = this.handleSupervisorChange.bind(this);
         this.getTerritories = this.getTerritories.bind(this);
+        this.handleUserTypeChange = this.handleUserTypeChange.bind(this);
     }
 
     componentDidMount()
@@ -70,10 +73,14 @@ class AddUser extends React.Component {
         ZoneApi.getAllZones().then(res => {
             let response = res.data;
             let zones = response.zones;
-
-            this.setState({
-                zones: zones
-            }, this.getAllUsers);
+            UserApi.getUserTypes().then(res => {
+                console.log(res);
+                let userTypes = res.types || [];
+                this.setState({
+                    zones: zones,
+                    userTypes: userTypes
+                }, this.getAllUsers);
+            });
         })
     }
 
@@ -81,9 +88,8 @@ class AddUser extends React.Component {
     {
         UserApi.getAllUsers()
         .then((res) => {
-            let response = res.data;
             this.setState({
-                users: response.users || []
+                users: res.users || []
             });
         })
         .catch((err) => {
@@ -120,14 +126,15 @@ class AddUser extends React.Component {
     saveUser(e)
     {
         e.preventDefault();
-        let {userId, userName, userDesignation, userEmail, userPhone, userPassword} = this.state;
+        let {userId, userName, userDesignation, userEmail, userPhone, userPassword, selectedUserType} = this.state;
         let userTerritory = this.state.userTerritory && this.state.userTerritory.TerritoryID;
 
         let supervisor = this.state.supervisor && this.state.supervisor.UserID;
 
-        UserApi.saveUser(userId, userName, userPassword, userDesignation, userEmail, userPhone, userTerritory, supervisor).then(res => {
+        UserApi.saveUser(userId, userName, userPassword, userDesignation, userEmail, userPhone, userTerritory, supervisor, selectedUserType).then(res => {
             swal("Success!", "User created successfully", "success");
             this.userForm.current.reset();
+            this.getAllUsers();
         }).catch((err) => {
             swal("Error!", "User could not be created", "error");
         });
@@ -154,7 +161,7 @@ class AddUser extends React.Component {
             }
 
             this.setState({
-                territories: response.territories || [],
+                territories: territories || [],
                 userTerritory: userTerritory
             });
         });
@@ -185,6 +192,14 @@ class AddUser extends React.Component {
         }).catch(err => {
             swal("Error!","Could not delete user", "error");
         });
+    }
+
+    handleUserTypeChange(event)
+    {
+        let value = event.target.value;
+        this.setState({
+            selectedUserType: value
+        })
     }
 
     render() {
@@ -245,6 +260,26 @@ class AddUser extends React.Component {
                                             userName: e.target.value
                                         })}
                                     />
+                                </Grid>
+                                <br/>
+                                <Grid item lg={12} sm={12}>
+                                    <FormControl variant="outlined" style={{width: 300}}>
+                                        <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={this.state.selectedUserType}
+                                            onChange={this.handleUserTypeChange}
+                                            label="Age"
+                                        >
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            {this.state.userTypes.map(userType => (
+                                                <MenuItem key={userType.UserTypeID} value={userType.UserTypeID}>{userType.UserType}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
                                 </Grid>
                                 <Grid item lg={12} sm={12}>
                                     <TextField

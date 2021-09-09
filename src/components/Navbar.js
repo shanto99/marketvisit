@@ -60,7 +60,7 @@ class Navbar extends React.Component {
     {
         this.props.start_loader();
         authHelpers.logOut().then(res => {
-            this.props.end_loader();
+           this.props.end_loader();
            swal("Success!", "Logged out successfully", "success");
            this.props.make_logout();
            this.handleClose();

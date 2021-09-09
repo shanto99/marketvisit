@@ -9,6 +9,7 @@ import Zones from "../pages/Zones";
 import Territories from "../pages/Territories";
 import Outlets from "../pages/Outlets";
 import LayeredMap from "../pages/NationalDataVisualization";
+import AttendanceMap from "../pages/AttendanceMap";
 
 import Sidebar from "../components/Sidebar";
 import {connect} from "react-redux";
@@ -54,6 +55,9 @@ class MainLayout extends React.Component {
                                 </Route>
                                 <Route path="/outlets">
                                     <Outlets/>
+                                </Route>
+                                <Route path="/attendances">
+                                    <AttendanceMap/>
                                 </Route>
                                 <Route path="/national-overview">
                                     <LayeredMap/>

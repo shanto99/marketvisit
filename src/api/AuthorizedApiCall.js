@@ -2,8 +2,9 @@ import axios from "axios";
 import baseUrl from "../BaseApiUrl";
 
 const authorizedApiCall = (method, endPoint, payload) => {
-    let token = localStorage.getItem('marketvisit-user');
-
+    let user = localStorage.getItem('marketvisit-user');
+    if(user) user = JSON.parse(user);
+    let token = user && user.token;
     return new Promise(function (resolve, reject) {
         try{
             axios({

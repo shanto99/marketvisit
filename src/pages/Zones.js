@@ -47,6 +47,7 @@ class Zones extends React.Component {
         this.getAllZones = this.getAllZones.bind(this);
         this.saveZone = this.saveZone.bind(this);
         this.editZone = this.editZone.bind(this);
+        this.deleteZone = this.deleteZone.bind(this);
     }
     componentDidMount() {
         this.getAllZones();
@@ -96,6 +97,11 @@ class Zones extends React.Component {
         });
     }
 
+    deleteZone(zoneId)
+    {
+        console.log(zoneId);
+    }
+
     render() {
         const classes = this.props.classes;
         return (
@@ -117,6 +123,7 @@ class Zones extends React.Component {
                                             itemId={zone.ZoneID}
                                             primaryText={`${zone.ZoneID}-${zone.Zone}`}
                                             editCallback={this.editZone}
+                                            deleteCallback={this.deleteZone}
                                         />)
                                     })}
                                 </List>
